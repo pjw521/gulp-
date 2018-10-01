@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2018-09-28 17:26:01
 * @Last Modified by:   Marte
-* @Last Modified time: 2018-09-28 20:42:50
+* @Last Modified time: 2018-10-01 09:28:07
 */
 
 var gulp = require('gulp'),
@@ -11,9 +11,12 @@ var gulp = require('gulp'),
     concat = require("gulp-concat"),
     htmlmin = require('gulp-htmlmin'),
     uglify = require('gulp-uglify'),
-    bs = require('browser-sync').create();
+    bs = require('browser-sync').create(),
+    runSequence = require('run-sequence');
 
-
+gulp.task('default', function() {
+    runSequence(['clean'], ['build'], ['serve', 'watch']);//默认执行任务
+});
 //less编译 压缩 合并
 gulp.task('style',function(){
         gulp.src(['src/styles/*.less','!src/styles/_*.less'])
